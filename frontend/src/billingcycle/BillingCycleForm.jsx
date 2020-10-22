@@ -12,10 +12,9 @@ import { init } from "./billingCycleActions";
 class BillingCycleForm extends Component {
   calculateSummary() {
     const sum = (t, v) => t + v;
-
     return {
-      sumOfCredits: this.props.credits.map((c) => +c.value || 0).reduce(sum),
-      sumOfDebts: this.props.debts.map((d) => +d.value || 0).reduce(sum),
+      sumOfCredits: this.props.credits.map((c) => +c.value || 0).reduce(sum, 0),
+      sumOfDebts: this.props.debts.map((d) => +d.value || 0).reduce(sum, 0),
     };
   }
 
@@ -23,60 +22,59 @@ class BillingCycleForm extends Component {
     const { handleSubmit, readOnly, credits, debts } = this.props;
     const { sumOfCredits, sumOfDebts } = this.calculateSummary();
     return (
-      <form role="form" onSubmit={handleSubmit}>
-        <div className="box-body">
+      <form role='form' onSubmit={handleSubmit}>
+        <div className='box-body'>
           <Field
-            name="name"
+            name='name'
             component={LabelAndInput}
-            label="Name"
-            cols="12 4"
-            placeholder="Insert name"
+            label='Name'
+            cols='12 4'
+            placeholder='Insert name'
             readOnly={readOnly}
           />
           <Field
-            name="month"
+            name='month'
             component={LabelAndInput}
-            type="number"
-            label="Month"
-            cols="12 4"
-            placeholder="Insert month"
+            type='number'
+            label='Month'
+            cols='12 4'
+            placeholder='Insert month'
             readOnly={readOnly}
           />
           <Field
-            name="year"
+            name='year'
             component={LabelAndInput}
-            type="number"
-            label="Year"
-            cols="12 4"
-            placeholder="Insert year"
+            type='number'
+            label='Year'
+            cols='12 4'
+            placeholder='Insert year'
             readOnly={readOnly}
           />
           <Summary credit={sumOfCredits} debt={sumOfDebts} />
           <ItemList
-            cols="12 6"
+            cols='12 6'
             readOnly={readOnly}
             list={credits}
-            legend="Credits"
-            field="credits"
+            legend='Credits'
+            field='credits'
           />
           <ItemList
-            cols="12 6"
+            cols='12 6'
             readOnly={readOnly}
             list={debts}
-            legend="Debts"
-            field="debts"
+            legend='Debts'
+            field='debts'
             showStatus
           />
         </div>
-        <div className="box-footer">
-          <button type="submit" className={`btn btn-${this.props.submitClass}`}>
+        <div className='box-footer'>
+          <button type='submit' className={`btn btn-${this.props.submitClass}`}>
             {this.props.submitLabel}
           </button>
           <button
-            type="button"
-            className="btn btn-default"
-            onClick={this.props.init}
-          >
+            type='button'
+            className='btn btn-default'
+            onClick={this.props.init}>
             Cancel
           </button>
         </div>

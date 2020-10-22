@@ -45,6 +45,7 @@ export function showUpdate(billingCycle) {
 }
 
 export function showDelete(billingCycle) {
+  console.log("DELETE");
   return [
     showTabs("tabDelete"),
     selectTab("tabDelete"),
